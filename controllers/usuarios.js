@@ -48,9 +48,9 @@ ruta.post('/', (req, res) => {
     }
 });
 
-//Enpoint de tipo POST para actualizar los datos del usuario
+//Enpoint de tipo PUT para actualizar los datos del usuario
 ruta.put('/:email', (req, res) => {
-    const {error, value} = schema.validate({ email: req.body.nombre});
+    const {error, value} = schema.validate({ nombre: req.body.nombre});
     if(!error) {
         let resultado = actualizarUsuario(req.params.email, req.body);
         resultado.then(valor => {
@@ -68,6 +68,8 @@ ruta.put('/:email', (req, res) => {
         })
     }
 });
+
+
 // Funcion asincrona para crear un objeto de tipo usuarrio
 async function crearUsuario(body) {
     let usuario = new Usuario({
