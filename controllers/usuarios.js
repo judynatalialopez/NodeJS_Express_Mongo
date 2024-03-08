@@ -69,6 +69,19 @@ ruta.put('/:email', (req, res) => {
     }
 });
 
+// Endpoint dde tipo DELETE para el recurso USUARIO
+ruta.delete('/:email',  (req, res) => {
+    let resultado = desactivarUsuaio(req.params.email);
+    resultado.then(valor => {
+        result.json({
+            usuario: valor
+        })
+    }).catch(err => {
+        res.status(400).json({
+            err
+        })
+    });
+});
 
 // Funcion asincrona para crear un objeto de tipo usuarrio
 async function crearUsuario(body) {
@@ -91,5 +104,14 @@ async function actualizarUsuario(email, body){
     return usuario;
 }
 
+// Funcion asincrona para inactivar un usuario
+async function desactivarUsuaio(email){
+    let usuario = await Usuario.findOneAndUpdate({"email": email}, {
+        $set: {
+            estado: false,
+        }
+    }, {new: true});
+    return usuario;
+}
 
 module.exports = ruta;
