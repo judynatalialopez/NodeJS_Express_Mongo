@@ -71,7 +71,7 @@ ruta.put('/:email', (req, res) => {
 
 // Endpoint dde tipo DELETE para el recurso USUARIO
 ruta.delete('/:email',  (req, res) => {
-    let resultado = desactivarUsuaio(req.params.email);
+    let resultado = desactivarUsuario(req.params.email);
     resultado.then(valor => {
         result.json({
             usuario: valor
@@ -105,7 +105,7 @@ async function actualizarUsuario(email, body){
 }
 
 // Funcion asincrona para inactivar un usuario
-async function desactivarUsuaio(email){
+async function desactivarUsuario(email){
     let usuario = await Usuario.findOneAndUpdate({"email": email}, {
         $set: {
             estado: false,
