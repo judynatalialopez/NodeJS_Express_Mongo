@@ -3,10 +3,6 @@ const Usuario = require('../models/usuario_model');
 const Joi = require('@hapi/joi');
 const ruta = express.Router();
 
-ruta.get('/', (req, res) => {
-    res.json('respuesta a la peticion GET de CURSOS correctamente...')
-});
-
 
 // Validacones para el objeto usuario
 const schema = Joi.object({
@@ -23,6 +19,19 @@ const schema = Joi.object({
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'edu', 'co'] } })
 });
 
+//Endpoint de tipo GET para el recurso usurios. Lista todos los usuarios
+ruta.get('/',(req, res) => {
+    let resultado = listarUsuarioActivos()
+    resultado.then(usuarios =>{
+        res.json(usuarios)
+    }).catch(err => { 
+        res.status(400).json(
+            {
+                err
+            }
+        )
+    })
+});
 
 //Enpoint de tipo POST paraa el recurso USUARIOS
 ruta.post('/', (req, res) => {
@@ -112,6 +121,12 @@ async function desactivarUsuario(email){
         }
     }, {new: true});
     return usuario;
+}
+
+//Funcion asincrona para listar todos los usuarios activos
+async function listarUsuarioActivos(){
+    let usuarios = await Usuario.find({"estado": true});
+    return usuarios;
 }
 
 module.exports = ruta;
