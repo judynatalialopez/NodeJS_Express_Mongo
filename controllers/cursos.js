@@ -23,6 +23,19 @@ ruta.post('/', (req, res) =>{
     })
 });
 
+<<<<<<< HEAD
+=======
+//Endpoint de tipo Put para el rescurso Cursos 
+ruta.put('/:id', (req, res) => {
+    let resultado = actualizarCurso(req.params.id, req.body);
+    resultado.then(curso => {
+        res.json(curso)
+    }).catch(err => {
+        res.status(400).json(err)
+    })
+});
+
+>>>>>>> apirest
 // Funcion asincrona para crear cursos 
 async function crearCurso(body){
     let curso = new Curso({
@@ -34,5 +47,18 @@ async function crearCurso(body){
     return await curso.save();
 }
 
+<<<<<<< HEAD
+=======
+// Funcion asincrona para actualizar cursos
+async function actualizarCurso(id, body){
+    let curso = await Curso.findByIdAndUpdate(id, {
+        $set: {
+            titulo: body.titulo,
+            descripcion: body.descripcion
+        }
+    }, {new: true});
+    return curso;
+}
+>>>>>>> apirest
 
 module.exports = ruta;
