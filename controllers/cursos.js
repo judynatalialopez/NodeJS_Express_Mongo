@@ -21,8 +21,6 @@ ruta.post('/', (req, res) =>{
     })
 });
 
-<<<<<<< HEAD
-=======
 //Endpoint de tipo Put para el rescurso Cursos 
 ruta.put('/:id', (req, res) => {
     let resultado = actualizarCurso(req.params.id, req.body);
@@ -33,9 +31,7 @@ ruta.put('/:id', (req, res) => {
     })
 });
 
-<<<<<<< HEAD
->>>>>>> apirest
-=======
+
 //Endpoint de tipo DELETE para el recurso CURSOS
 ruta.delete('/:id', (req, res) => {
     let resultado = desactivarCurso(req.params.id);
@@ -46,7 +42,7 @@ ruta.delete('/:id', (req, res) => {
     })
 })
 
->>>>>>> apirest
+
 // Funcion asincrona para crear cursos 
 async function crearCurso(body){
     let curso = new Curso({
@@ -58,8 +54,7 @@ async function crearCurso(body){
     return await curso.save();
 }
 
-<<<<<<< HEAD
-=======
+
 // Funcion asincrona para actualizar cursos
 async function actualizarCurso(id, body){
     let curso = await Curso.findByIdAndUpdate(id, {
@@ -70,7 +65,7 @@ async function actualizarCurso(id, body){
     }, {new: true});
     return curso;
 }
->>>>>>> apirest
+
 
 //Funcion Asincrona para inectivar cursos
 async function desactivarCurso(id){
